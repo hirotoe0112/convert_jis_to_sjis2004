@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  python3:
+    image: python:3
+    volumes:
+      - ./:/usr/src
+    # WSL
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /mnt/wslg:/mnt/wslg
+    working_dir: /usr/src
+    tty: true
+    environment:
+      - DISPLAY=$DISPLAY
+      - WAYLAND_DISPLAY=$WAYLAND_DISPLAY
+      - XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR
+      - PULSE_SERVER=$PULSE_SERVER
+    # install font
+    command: >
+      bash -c "apt update && apt install -y fonts-noto-cjk && bash"
